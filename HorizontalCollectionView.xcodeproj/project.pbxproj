@@ -8,20 +8,34 @@
 
 /* Begin PBXBuildFile section */
 		1FC053FA20063FE60039B558 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC053F920063FE60039B558 /* AppDelegate.swift */; };
-		1FC053FC20063FE60039B558 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC053FB20063FE60039B558 /* ViewController.swift */; };
+		1FC053FC20063FE60039B558 /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC053FB20063FE60039B558 /* ContactsViewController.swift */; };
 		1FC053FF20063FE60039B558 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FC053FD20063FE60039B558 /* Main.storyboard */; };
 		1FC0540120063FE60039B558 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1FC0540020063FE60039B558 /* Assets.xcassets */; };
 		1FC0540420063FE60039B558 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FC0540220063FE60039B558 /* LaunchScreen.storyboard */; };
+		1FC0540D2006465C0039B558 /* VoicelynContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC0540C2006465C0039B558 /* VoicelynContact.swift */; };
+		1FC054122006485B0039B558 /* FavouriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC054112006485B0039B558 /* FavouriteCell.swift */; };
+		1FC05414200648670039B558 /* ContactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC05413200648670039B558 /* ContactCell.swift */; };
+		1FC05416200648B70039B558 /* BaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC05415200648B70039B558 /* BaseCell.swift */; };
+		1FC0541920064D510039B558 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC0541820064D510039B558 /* Extensions.swift */; };
+		1FC0541B2007A8810039B558 /* ContactCellWithPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC0541A2007A8810039B558 /* ContactCellWithPhoto.swift */; };
+		1FC0541D2007CFE40039B558 /* FavouritesBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC0541C2007CFE40039B558 /* FavouritesBar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1FC053F620063FE60039B558 /* HorizontalCollectionView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HorizontalCollectionView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FC053F920063FE60039B558 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		1FC053FB20063FE60039B558 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		1FC053FB20063FE60039B558 /* ContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
 		1FC053FE20063FE60039B558 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1FC0540020063FE60039B558 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1FC0540320063FE60039B558 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1FC0540520063FE60039B558 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1FC0540C2006465C0039B558 /* VoicelynContact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoicelynContact.swift; sourceTree = "<group>"; };
+		1FC054112006485B0039B558 /* FavouriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteCell.swift; sourceTree = "<group>"; };
+		1FC05413200648670039B558 /* ContactCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactCell.swift; sourceTree = "<group>"; };
+		1FC05415200648B70039B558 /* BaseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCell.swift; sourceTree = "<group>"; };
+		1FC0541820064D510039B558 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		1FC0541A2007A8810039B558 /* ContactCellWithPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactCellWithPhoto.swift; sourceTree = "<group>"; };
+		1FC0541C2007CFE40039B558 /* FavouritesBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesBar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,14 +68,61 @@
 		1FC053F820063FE60039B558 /* HorizontalCollectionView */ = {
 			isa = PBXGroup;
 			children = (
+				1FC0541720064D180039B558 /* Utils */,
+				1FC0540E2006482D0039B558 /* View */,
+				1FC0540B200646480039B558 /* Model */,
 				1FC053F920063FE60039B558 /* AppDelegate.swift */,
-				1FC053FB20063FE60039B558 /* ViewController.swift */,
 				1FC053FD20063FE60039B558 /* Main.storyboard */,
 				1FC0540020063FE60039B558 /* Assets.xcassets */,
 				1FC0540220063FE60039B558 /* LaunchScreen.storyboard */,
 				1FC0540520063FE60039B558 /* Info.plist */,
 			);
 			path = HorizontalCollectionView;
+			sourceTree = "<group>";
+		};
+		1FC0540B200646480039B558 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1FC0540C2006465C0039B558 /* VoicelynContact.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		1FC0540E2006482D0039B558 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1FC05410200648410039B558 /* Cells */,
+				1FC0540F200648380039B558 /* Controllers */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		1FC0540F200648380039B558 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				1FC053FB20063FE60039B558 /* ContactsViewController.swift */,
+				1FC0541C2007CFE40039B558 /* FavouritesBar.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		1FC05410200648410039B558 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				1FC054112006485B0039B558 /* FavouriteCell.swift */,
+				1FC05413200648670039B558 /* ContactCell.swift */,
+				1FC05415200648B70039B558 /* BaseCell.swift */,
+				1FC0541A2007A8810039B558 /* ContactCellWithPhoto.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		1FC0541720064D180039B558 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				1FC0541820064D510039B558 /* Extensions.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -136,8 +197,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1FC053FC20063FE60039B558 /* ViewController.swift in Sources */,
+				1FC05414200648670039B558 /* ContactCell.swift in Sources */,
+				1FC0540D2006465C0039B558 /* VoicelynContact.swift in Sources */,
+				1FC054122006485B0039B558 /* FavouriteCell.swift in Sources */,
+				1FC053FC20063FE60039B558 /* ContactsViewController.swift in Sources */,
+				1FC05416200648B70039B558 /* BaseCell.swift in Sources */,
+				1FC0541D2007CFE40039B558 /* FavouritesBar.swift in Sources */,
 				1FC053FA20063FE60039B558 /* AppDelegate.swift in Sources */,
+				1FC0541920064D510039B558 /* Extensions.swift in Sources */,
+				1FC0541B2007A8810039B558 /* ContactCellWithPhoto.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -277,6 +345,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JBEYETDGSB;
 				INFOPLIST_FILE = HorizontalCollectionView/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = nMfpCoding.HorizontalCollectionView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -292,6 +361,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JBEYETDGSB;
 				INFOPLIST_FILE = HorizontalCollectionView/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = nMfpCoding.HorizontalCollectionView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
