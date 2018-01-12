@@ -8,17 +8,16 @@
 
 import UIKit
 
-class FavouriteCell: UICollectionViewCell {
+class FavouriteCell: BaseCell {
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        setupViews()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+//    override init(frame: CGRect) {
+//        super.init(frame: frame)
+//        setupViews()
+//    }
+//
+//    required init?(coder aDecoder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
     var contact: VoicelynContact? {
         didSet {
             guard let contact = contact else {return}
@@ -30,7 +29,7 @@ class FavouriteCell: UICollectionViewCell {
         }
     }
     
-    let height: CGFloat = 70
+    let height: CGFloat = 60
     var delegate: FavouriteContactProtocol?
     
     lazy var profileImageView: UIImageView = {
@@ -39,7 +38,6 @@ class FavouriteCell: UICollectionViewCell {
         iv.clipsToBounds = true
         iv.layer.cornerRadius = height / 2
         iv.isUserInteractionEnabled = true
-//        iv.translatesAutoresizingMaskIntoConstraints = false
         iv.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTappingFavourite)))
         iv.backgroundColor = .red
         return iv
@@ -57,15 +55,15 @@ class FavouriteCell: UICollectionViewCell {
     
     @objc func handleTappingFavourite() {
         print("Tap na favorite cell...")
-//        delegate?.handleTappingFavourite(cell: self)
+        delegate?.handleTappingFavourite(cell: self)
     }
     
     
-     func setupViews() {
+    override func setupViews() {
         addSubview(profileImageView)
-//        addSubview(nameLabel)
+        addSubview(nameLabel)
         backgroundColor = .gray
-        profileImageView.anchor(top: nil, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: height / 2, height: height / 2)
-//        nameLabel.anchor(top: profileImageView.bottomAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 10, paddingLeft: 5, paddingBottom: 15, paddingRight: 5, width: 0, height: 0)
+        profileImageView.anchor(top: topAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, paddingTop: 15, paddingLeft: 15, paddingBottom: 0, paddingRight: 15, width: 0, height: height)
+        nameLabel.anchor(top: profileImageView.bottomAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 10, paddingLeft: 5, paddingBottom: 15, paddingRight: 5, width: 0, height: 0)
     }
 }

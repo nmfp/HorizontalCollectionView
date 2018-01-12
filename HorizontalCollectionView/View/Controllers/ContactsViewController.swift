@@ -9,10 +9,11 @@
 import UIKit
 import Contacts
 
-class ContactsViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, FavouriteContactProtocol, UISearchBarDelegate{
+class ContactsViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, FavouriteContactProtocol, UISearchBarDelegate{
     
     var contactsArray = [VoicelynContact]()
-    var filteredContacts = [VoicelynContact]()
+    var filteredContactsArray = [VoicelynContact]()
+    var favoritesArray = [VoicelynContact]()
     
     let contactCellId = "contactCellId"
     let contactCellIdWithPhoto = "contactCellIdWithPhoto"
@@ -22,6 +23,8 @@ class ContactsViewController: UICollectionViewController, UICollectionViewDelega
     var searchBarLeftAnchor: NSLayoutConstraint?
     var searchBarRightAnchor: NSLayoutConstraint?
     var navBar: UINavigationBar?
+    
+    var favouritesBarHeight: NSLayoutConstraint?
     
     lazy var searchBar: UISearchBar = {
         let sb = UISearchBar()
@@ -33,27 +36,54 @@ class ContactsViewController: UICollectionViewController, UICollectionViewDelega
         return sb
     }()
     
+    lazy var favouritesBar: FavouritesBar = {
+        let view = FavouritesBar()
+        view.backgroundColor = .green
+        view.delegate = self
+        return view
+    }()
+    
+    lazy var contactsCollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        cv.backgroundColor = .red
+        cv.dataSource = self
+        cv.delegate = self
+        return cv
+    }()
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        collectionView?.backgroundColor = .white
-        
+        view.backgroundColor = .white
         setupNavBar()
+        setupFavouritesBar()
         fetchContacts()
         
-        collectionView?.delegate = self
-        collectionView?.alwaysBounceVertical = true
-        collectionView?.keyboardDismissMode = .onDrag
         
-        collectionView?.register(ContactCell.self, forCellWithReuseIdentifier: contactCellId)
-        collectionView?.register(ContactCellWithPhoto.self, forCellWithReuseIdentifier: contactCellIdWithPhoto)
-        collectionView?.register(FavouritesBar.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: favouriteBarId)
+        view.addSubview(contactsCollectionView)
+        contactsCollectionView.backgroundColor = .white
+//        contactsCollectionView.delegate = self
+//        contactsCollectionView.translatesAutoresizingMaskIntoConstraints = false
+//        contactsCollectionView.topAnchor.constraint(equalTo: favouritesBar.bottomAnchor).isActive = true
+        contactsCollectionView.anchor(top: favouritesBar.bottomAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+        contactsCollectionView.alwaysBounceVertical = true
+        contactsCollectionView.keyboardDismissMode = .onDrag
+        
+        contactsCollectionView.register(ContactCell.self, forCellWithReuseIdentifier: contactCellId)
+        contactsCollectionView.register(ContactCellWithPhoto.self, forCellWithReuseIdentifier: contactCellIdWithPhoto)
+        contactsCollectionView.register(FavouritesBar.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: favouriteBarId)
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+    }
+    
+    fileprivate func setupFavouritesBar() {
+        view.addSubview(favouritesBar)
+        favouritesBar.anchor(top: self.topLayoutGuide.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+        favouritesBarHeight = favouritesBar.heightAnchor.constraint(equalToConstant: 140)
+        favouritesBarHeight?.isActive = true
     }
     
     fileprivate func setupNavBar() {
@@ -104,9 +134,9 @@ class ContactsViewController: UICollectionViewController, UICollectionViewDelega
                         self.contactsArray.append(VoicelynContact(contact: contact))
                     })
                     self.contactsArray = self.contactsArray.sorted{$0.name < $1.name}
-                    self.filteredContacts = self.contactsArray
+                    self.filteredContactsArray = self.contactsArray
                     DispatchQueue.main.async {
-                        self.collectionView?.reloadData()
+                        self.contactsCollectionView.reloadData()
                     }
                 }
                 catch let err {
@@ -123,16 +153,16 @@ class ContactsViewController: UICollectionViewController, UICollectionViewDelega
     //MARK: - FavoriteContactProtocol Delegate
     func handleTappingContact(cell: BaseCell) {
         guard let cell = cell as? ContactCellWithPhoto else {return}
-        guard let cellIndexPath = collectionView?.indexPath(for: cell) else {return}
+        guard let cellIndexPath = contactsCollectionView.indexPath(for: cell) else {return}
         let contactTapped = contactsArray[cellIndexPath.row]
         let isFavourited = contactTapped.isFavourited
         contactsArray[cellIndexPath.row].isFavourited = !isFavourited
-        filteredContacts[cellIndexPath.row].isFavourited = !isFavourited
+        filteredContactsArray[cellIndexPath.row].isFavourited = !isFavourited
         print("Favorito carregado na posicao: ", cellIndexPath.item)
 
         cell.starButton.tintColor = isFavourited ? UIColor.rgb(red: 225, green: 225, blue: 225) : UIColor.rgb(red: 255, green: 206, blue: 27) 
 //        DispatchQueue.main.async {
-//            self.collectionView?.reloadData()
+//            self.contactsCollectionView.reloadData()
 //        }
     }
     
@@ -141,18 +171,18 @@ class ContactsViewController: UICollectionViewController, UICollectionViewDelega
     }
     
     //MARK: - CollectionView Delegate / Datasource
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return filteredContacts.count
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return filteredContactsArray.count
     }
     
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 //        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: contactCellId, for: indexPath) as! ContactCell
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: contactCellIdWithPhoto, for: indexPath) as! ContactCellWithPhoto
-        cell.contact = filteredContacts[indexPath.item]
+        cell.contact = filteredContactsArray[indexPath.item]
         cell.delegate = self
         return cell
     }
@@ -162,28 +192,28 @@ class ContactsViewController: UICollectionViewController, UICollectionViewDelega
     }
     
 
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: view.frame.width, height: 140)
-    }
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+//        return CGSize(width: view.frame.width, height: 140)
+//    }
+//
+//    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+//        
+//        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: favouriteBarId, for: indexPath) as! FavouritesBar
+//
+//        return header
+//    }
     
-    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        
-        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: favouriteBarId, for: indexPath) as! FavouritesBar
-
-        return header
-    }
     
-    
-    override func scrollViewDidScrollToTop(_ scrollView: UIScrollView) {
+    func scrollViewDidScrollToTop(_ scrollView: UIScrollView) {
         print("SCROLL")
     }
     
-    override func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         print("scrollViewDidEndDecelerating")
         searchBarTextDidEndEditing(searchBar)
     }
     
-    override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         print("scrollViewDidEndDragging")
         
     }
@@ -212,13 +242,13 @@ class ContactsViewController: UICollectionViewController, UICollectionViewDelega
         print(searchText)
         
         if searchText.isEmpty {
-            filteredContacts = contactsArray
+            filteredContactsArray = contactsArray
             searchBarTextDidEndEditing(searchBar)
         }
         else {
-            filteredContacts = contactsArray.filter { contact in contact.name.lowercased().contains(searchText.lowercased())}
+            filteredContactsArray = contactsArray.filter { contact in contact.name.lowercased().contains(searchText.lowercased())}
         }
-        self.collectionView?.reloadData()
+        self.contactsCollectionView.reloadData()
     }
 }
 

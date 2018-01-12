@@ -16,8 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        let layout = UICollectionViewFlowLayout()
-        let contactViewController = ContactsViewController(collectionViewLayout: layout)
+        let contactViewController = ContactsViewController()
         let navController = UINavigationController(rootViewController: contactViewController)
         
         window = UIWindow()
