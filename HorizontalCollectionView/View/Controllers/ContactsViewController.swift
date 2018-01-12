@@ -13,6 +13,7 @@ class ContactsViewController: UICollectionViewController, UICollectionViewDelega
     
     var contactsArray = [VoicelynContact]()
     var filteredContacts = [VoicelynContact]()
+    
     let contactCellId = "contactCellId"
     let contactCellIdWithPhoto = "contactCellIdWithPhoto"
     let favouriteBarId = "favouriteBarId"

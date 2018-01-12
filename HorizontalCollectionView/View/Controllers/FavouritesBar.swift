@@ -17,6 +17,7 @@ class FavouritesBar: BaseCell, UICollectionViewDataSource, UICollectionViewDeleg
         cv.backgroundColor = UIColor.rgb(red: 230, green: 32, blue: 31)
         cv.dataSource = self
         cv.delegate = self
+        cv.alwaysBounceHorizontal = true
         return cv
     }()
     
@@ -41,8 +42,13 @@ class FavouritesBar: BaseCell, UICollectionViewDataSource, UICollectionViewDeleg
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: favouriteCellId, for: indexPath) as! FavouriteCell
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: favouriteCellId, for: indexPath) as! FavouriteCell
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 65, height: 140)
     }
 }
 
