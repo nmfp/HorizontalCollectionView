@@ -18,19 +18,20 @@ class FavouritesBar: UIView, UICollectionViewDataSource, UICollectionViewDelegat
         cv.dataSource = self
         cv.delegate = self
         cv.alwaysBounceHorizontal = true
-        cv.backgroundColor = .green
+        cv.backgroundColor = .brown
         return cv
     }()
     
     let favouriteCellId = "favouriteCellId"
     let width: CGFloat = 90
-    let items: CGFloat = 7
+    let items: CGFloat = 0
+    var favourites: [VoicelynContact]?
     
     var delegate: ContactsViewController?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+        backgroundColor = .orange
         addSubview(collectionView)
         setupCollectionView()
     }
@@ -50,7 +51,7 @@ class FavouritesBar: UIView, UICollectionViewDataSource, UICollectionViewDelegat
     //MARK: - Collection Delegate/Datasource
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return Int(items)
+        return favourites?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -83,21 +84,15 @@ class FavouritesBar: UIView, UICollectionViewDataSource, UICollectionViewDelegat
         } else {
             // Fallback on earlier versions
         }
-        if #available(iOS 11.0, *) {
-            print("Adjusted: ", collectionView.adjustedContentInset)
-        } else {
-            // Fallback on earlier versions
-        }
-//        let totalCellWidth = width * collectionView.contentInset
-//        let totalSpacingWidth = CellSpacing * (CellCount - 1)
-//
-//        let leftInset = (collectionViewWidth - CGFloat(totalCellWidth + totalSpacingWidth)) / 2
-//        let rightInset = leftInset
+
 
         let totalWidth = items * width
         let left = (self.frame.width / 2) - (totalWidth / 2)
         
-        return UIEdgeInsetsMake(0, left, 0, left)
+        if totalWidth < self.frame.width {
+            return UIEdgeInsetsMake(0, left, 0, left)
+        }
+        return UIEdgeInsetsMake(0, 0, 0, 0)
     }
 }
 

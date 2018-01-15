@@ -65,5 +65,5 @@ class FavouriteCell: BaseCell {
         backgroundColor = .gray
         profileImageView.anchor(top: topAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, paddingTop: 15, paddingLeft: 15, paddingBottom: 0, paddingRight: 15, width: 0, height: height)
         nameLabel.anchor(top: profileImageView.bottomAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 10, paddingLeft: 5, paddingBottom: 15, paddingRight: 5, width: 0, height: 0)
-    }
+    }   
 }

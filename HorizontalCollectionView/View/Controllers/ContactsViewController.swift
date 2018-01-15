@@ -13,7 +13,7 @@ class ContactsViewController: UIViewController, UICollectionViewDataSource, UICo
     
     var contactsArray = [VoicelynContact]()
     var filteredContactsArray = [VoicelynContact]()
-    var favoritesArray = [VoicelynContact]()
+    var favouritesArray = [VoicelynContact]()
     
     let contactCellId = "contactCellId"
     let contactCellIdWithPhoto = "contactCellIdWithPhoto"
@@ -59,7 +59,11 @@ class ContactsViewController: UIViewController, UICollectionViewDataSource, UICo
         setupNavBar()
         setupFavouritesBar()
         fetchContacts()
-        
+        //Quando uma ViewController tem uma ScrollView, esta tem a intencao de ajustar o contentInsect desta
+        //para ter em canta a altura da statusBar e da navigationBar, e para evitar isso define-se esta propriedade
+        //a false para indicar que o contentInsect e gerido pelo programador.
+        //No iOS11 nao foi necessario fazer isto mas para o iOS10 as celulas apareciam muito abaixo do topo da collectionView
+        self.automaticallyAdjustsScrollViewInsets = false
         
         view.addSubview(contactsCollectionView)
         contactsCollectionView.backgroundColor = .white
@@ -82,8 +86,9 @@ class ContactsViewController: UIViewController, UICollectionViewDataSource, UICo
     fileprivate func setupFavouritesBar() {
         view.addSubview(favouritesBar)
         favouritesBar.anchor(top: self.topLayoutGuide.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
-        favouritesBarHeight = favouritesBar.heightAnchor.constraint(equalToConstant: 140)
+        favouritesBarHeight = favouritesBar.heightAnchor.constraint(equalToConstant: 142)
         favouritesBarHeight?.isActive = true
+        favouritesBarHeight?.constant = 0
     }
     
     fileprivate func setupNavBar() {
@@ -150,6 +155,23 @@ class ContactsViewController: UIViewController, UICollectionViewDataSource, UICo
         }
     }
     
+    fileprivate func animateFavouritesBar() {
+        if favouritesArray.count > 0 {
+            favouritesBarHeight?.isActive = false
+            favouritesBarHeight?.constant = 140
+            favouritesBarHeight?.isActive = true
+        }
+        else {
+            favouritesBarHeight?.isActive = false
+            favouritesBarHeight?.constant = 0
+            favouritesBarHeight?.isActive = true
+        }
+        
+        UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseInOut, animations: {
+            self.view.layoutIfNeeded()
+        }, completion: nil)
+    }
+    
     //MARK: - FavoriteContactProtocol Delegate
     func handleTappingContact(cell: BaseCell) {
         guard let cell = cell as? ContactCellWithPhoto else {return}
@@ -161,9 +183,20 @@ class ContactsViewController: UIViewController, UICollectionViewDataSource, UICo
         print("Favorito carregado na posicao: ", cellIndexPath.item)
 
         cell.starButton.tintColor = isFavourited ? UIColor.rgb(red: 225, green: 225, blue: 225) : UIColor.rgb(red: 255, green: 206, blue: 27) 
-//        DispatchQueue.main.async {
-//            self.contactsCollectionView.reloadData()
-//        }
+
+        if !isFavourited {
+            favouritesArray.append(contactTapped)
+//            contactsArray[cellIndexPath.row].favoriteIndex = favoritesArray.count - 1
+            
+        }
+        else {
+//            guard let index = favoritesArray.index(of: contactTapped) else {return}
+//            favoritesArray.remove(at: index)
+            favouritesArray = favouritesArray.filter {$0.uuid != contactTapped.uuid}
+//            contactsArray[cellIndexPath.row].favoriteIndex = nil
+        }
+        favouritesBar.favourites = favouritesArray
+        animateFavouritesBar()
     }
     
     func handleTappingFavourite(cell: BaseCell) {
@@ -190,19 +223,6 @@ class ContactsViewController: UIViewController, UICollectionViewDataSource, UICo
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: view.frame.width, height: 80)
     }
-    
-
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-//        return CGSize(width: view.frame.width, height: 140)
-//    }
-//
-//    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-//        
-//        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: favouriteBarId, for: indexPath) as! FavouritesBar
-//
-//        return header
-//    }
-    
     
     func scrollViewDidScrollToTop(_ scrollView: UIScrollView) {
         print("SCROLL")

@@ -14,6 +14,7 @@ struct VoicelynContact {
     var profileImage: UIImage?
     var phoneNumbers: [String]
     var isFavourited: Bool
+    var uuid: String
     
     init(contact: CNContact) {
         self.name = contact.givenName + " " + contact.familyName
@@ -28,5 +29,6 @@ struct VoicelynContact {
         for phoneNumber in contact.phoneNumbers {
             self.phoneNumbers.append(phoneNumber.value.stringValue)
         }
+        self.uuid = UUID().uuidString
     }
 }
