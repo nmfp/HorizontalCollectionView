@@ -15,6 +15,7 @@ struct VoicelynContact {
     var phoneNumbers: [String]
     var isFavourited: Bool
     var uuid: String
+    var numberInUse: String?
     
     init(contact: CNContact) {
         self.name = contact.givenName + " " + contact.familyName

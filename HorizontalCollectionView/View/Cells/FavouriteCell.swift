@@ -10,14 +10,6 @@ import UIKit
 
 class FavouriteCell: BaseCell {
     
-//    override init(frame: CGRect) {
-//        super.init(frame: frame)
-//        setupViews()
-//    }
-//
-//    required init?(coder aDecoder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
     var contact: VoicelynContact? {
         didSet {
             guard let contact = contact else {return}
@@ -39,18 +31,25 @@ class FavouriteCell: BaseCell {
         iv.layer.cornerRadius = height / 2
         iv.isUserInteractionEnabled = true
         iv.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTappingFavourite)))
-        iv.backgroundColor = .red
+        iv.layer.borderWidth = 1
+        iv.layer.borderColor = UIColor.lightGray.cgColor
         return iv
     }()
     
     let nameLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 15)
+        label.font = UIFont.systemFont(ofSize: 12)
         label.text = "teste"
         label.numberOfLines = 0
         label.textAlignment = .center
-        label.backgroundColor = .blue
+//        label.backgroundColor = .blue
         return label
+    }()
+    
+    let separatorLine: UIView = {
+        let view = UIView()
+        view.backgroundColor = .lightGray
+        return view
     }()
     
     @objc func handleTappingFavourite() {
@@ -61,9 +60,11 @@ class FavouriteCell: BaseCell {
     
     override func setupViews() {
         addSubview(profileImageView)
+        addSubview(separatorLine)
         addSubview(nameLabel)
-        backgroundColor = .gray
+//        backgroundColor = .gray
         profileImageView.anchor(top: topAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, paddingTop: 15, paddingLeft: 15, paddingBottom: 0, paddingRight: 15, width: 0, height: height)
         nameLabel.anchor(top: profileImageView.bottomAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 10, paddingLeft: 5, paddingBottom: 15, paddingRight: 5, width: 0, height: 0)
+        separatorLine.anchor(top: nil, left: leftAnchor, bottom: nameLabel.topAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 15, paddingBottom: 0, paddingRight: 15, width: 0, height: 0.5)
     }   
 }

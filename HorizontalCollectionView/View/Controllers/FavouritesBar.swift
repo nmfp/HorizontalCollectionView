@@ -14,24 +14,27 @@ class FavouritesBar: UIView, UICollectionViewDataSource, UICollectionViewDelegat
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        cv.backgroundColor = UIColor.rgb(red: 230, green: 32, blue: 31)
+        cv.backgroundColor = UIColor.rgb(red: 245, green: 245, blue: 245)
         cv.dataSource = self
         cv.delegate = self
         cv.alwaysBounceHorizontal = true
-        cv.backgroundColor = .brown
         return cv
     }()
     
     let favouriteCellId = "favouriteCellId"
     let width: CGFloat = 90
     let items: CGFloat = 0
-    var favourites: [VoicelynContact]?
     
+    var favourites: [VoicelynContact]? {
+        didSet {
+            self.collectionView.reloadData()
+        }
+    }
+
     var delegate: ContactsViewController?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .orange
         addSubview(collectionView)
         setupCollectionView()
     }
@@ -41,15 +44,12 @@ class FavouritesBar: UIView, UICollectionViewDataSource, UICollectionViewDelegat
     }
     
     fileprivate func setupCollectionView() {
-//        collectionView.anchor(top: topAnchor, left: nil, bottom: bottomAnchor, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: items * width, height: 0)
-//        collectionView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         collectionView.anchor(top: topAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
         collectionView.register(FavouriteCell.self, forCellWithReuseIdentifier: favouriteCellId)
     }
     
     
     //MARK: - Collection Delegate/Datasource
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return favourites?.count ?? 0
     }
@@ -58,6 +58,9 @@ class FavouritesBar: UIView, UICollectionViewDataSource, UICollectionViewDelegat
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: favouriteCellId, for: indexPath) as! FavouriteCell
         cell.delegate = delegate
+        if let favouritesArray = favourites {
+           cell.contact = favouritesArray[indexPath.item]
+        }
         return cell
     }
     
@@ -75,18 +78,7 @@ class FavouritesBar: UIView, UICollectionViewDataSource, UICollectionViewDelegat
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-
-        print("Content: ", collectionView.contentInset)
-        print("Offset: ", collectionView.contentOffset)
-        print("Scroll: ", collectionView.scrollIndicatorInsets)
-        if #available(iOS 11.0, *) {
-            print("Safe: ", collectionView.safeAreaInsets)
-        } else {
-            // Fallback on earlier versions
-        }
-
-
-        let totalWidth = items * width
+        let totalWidth = CGFloat(favourites?.count ?? 0) * width
         let left = (self.frame.width / 2) - (totalWidth / 2)
         
         if totalWidth < self.frame.width {

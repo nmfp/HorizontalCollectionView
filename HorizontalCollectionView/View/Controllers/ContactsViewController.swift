@@ -67,9 +67,7 @@ class ContactsViewController: UIViewController, UICollectionViewDataSource, UICo
         
         view.addSubview(contactsCollectionView)
         contactsCollectionView.backgroundColor = .white
-//        contactsCollectionView.delegate = self
-//        contactsCollectionView.translatesAutoresizingMaskIntoConstraints = false
-//        contactsCollectionView.topAnchor.constraint(equalTo: favouritesBar.bottomAnchor).isActive = true
+        
         contactsCollectionView.anchor(top: favouritesBar.bottomAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
         contactsCollectionView.alwaysBounceVertical = true
         contactsCollectionView.keyboardDismissMode = .onDrag
@@ -97,13 +95,6 @@ class ContactsViewController: UIViewController, UICollectionViewDataSource, UICo
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "search").withRenderingMode(.alwaysOriginal), style: .done, target: self, action: #selector(handleSearchContacts))
         guard let navBar = navigationController?.navigationBar else {return}
         navBar.addSubview(searchBar)
-//        searchBar.anchor(top: nil, left: navBar.leftAnchor, bottom: nil, right: navBar.rightAnchor, paddingTop: 0, paddingLeft: 8, paddingBottom: 0, paddingRight: 8, width: 0, height: 0)
-//
-//        searchBarTopAnchor = searchBar.topAnchor.constraint(equalTo: navBar.topAnchor)
-//        searchBarTopAnchor?.isActive = true
-//        searchBarBottomAnchor = searchBar.heightAnchor.constraint(equalTo: 0)
-//        searchBarBottomAnchor?.isActive = true
-        
         
         searchBarTopAnchor = searchBar.topAnchor.constraint(equalTo: navBar.topAnchor)
         searchBarTopAnchor?.isActive = true
@@ -113,7 +104,6 @@ class ContactsViewController: UIViewController, UICollectionViewDataSource, UICo
     }
     
     @objc func handleSearchContacts() {
-        print("searching...")
         UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseInOut, animations: {
             self.searchBar.isHidden = false
             NSLayoutConstraint.activate([self.searchBarBottomAnchor!, self.searchBarLeftAnchor!, self.searchBarRightAnchor!])
@@ -176,26 +166,24 @@ class ContactsViewController: UIViewController, UICollectionViewDataSource, UICo
     func handleTappingContact(cell: BaseCell) {
         guard let cell = cell as? ContactCellWithPhoto else {return}
         guard let cellIndexPath = contactsCollectionView.indexPath(for: cell) else {return}
-        let contactTapped = contactsArray[cellIndexPath.row]
+        let contactTapped = filteredContactsArray[cellIndexPath.item]
         let isFavourited = contactTapped.isFavourited
-        contactsArray[cellIndexPath.row].isFavourited = !isFavourited
+        
+        let index = contactsArray.index {$0.uuid == contactTapped.uuid}
+        guard let contactIndex = index else {return}
+        
         filteredContactsArray[cellIndexPath.row].isFavourited = !isFavourited
-        print("Favorito carregado na posicao: ", cellIndexPath.item)
+        contactsArray[contactIndex].isFavourited = !isFavourited
 
         cell.starButton.tintColor = isFavourited ? UIColor.rgb(red: 225, green: 225, blue: 225) : UIColor.rgb(red: 255, green: 206, blue: 27) 
 
         if !isFavourited {
             favouritesArray.append(contactTapped)
-//            contactsArray[cellIndexPath.row].favoriteIndex = favoritesArray.count - 1
-            
         }
         else {
-//            guard let index = favoritesArray.index(of: contactTapped) else {return}
-//            favoritesArray.remove(at: index)
             favouritesArray = favouritesArray.filter {$0.uuid != contactTapped.uuid}
-//            contactsArray[cellIndexPath.row].favoriteIndex = nil
         }
-        favouritesBar.favourites = favouritesArray
+        self.favouritesBar.favourites = self.favouritesArray
         animateFavouritesBar()
     }
     
@@ -213,7 +201,6 @@ class ContactsViewController: UIViewController, UICollectionViewDataSource, UICo
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: contactCellId, for: indexPath) as! ContactCell
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: contactCellIdWithPhoto, for: indexPath) as! ContactCellWithPhoto
         cell.contact = filteredContactsArray[indexPath.item]
         cell.delegate = self
@@ -245,9 +232,6 @@ class ContactsViewController: UIViewController, UICollectionViewDataSource, UICo
     
     //MARK: - SearchBar Delegate
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        print("Saiu do search")
-//        searchBar.text = nil
-        
         if searchBar.text == "" && !searchBar.isFirstResponder {
             UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseInOut, animations: {
                 self.searchBar.isHidden = true
@@ -259,8 +243,6 @@ class ContactsViewController: UIViewController, UICollectionViewDataSource, UICo
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        print(searchText)
-        
         if searchText.isEmpty {
             filteredContactsArray = contactsArray
             searchBarTextDidEndEditing(searchBar)

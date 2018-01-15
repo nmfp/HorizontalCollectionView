@@ -19,6 +19,10 @@
 		1FC0541920064D510039B558 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC0541820064D510039B558 /* Extensions.swift */; };
 		1FC0541B2007A8810039B558 /* ContactCellWithPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC0541A2007A8810039B558 /* ContactCellWithPhoto.swift */; };
 		1FC0541D2007CFE40039B558 /* FavouritesBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC0541C2007CFE40039B558 /* FavouritesBar.swift */; };
+		1FC0541F200D09180039B558 /* ChooseNumberOrigin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC0541E200D09180039B558 /* ChooseNumberOrigin.swift */; };
+		1FC05421200D11660039B558 /* ChooseDifferentNumberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC05420200D11660039B558 /* ChooseDifferentNumberCell.swift */; };
+		1FC05423200D18290039B558 /* OriginNumberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC05422200D18290039B558 /* OriginNumberCell.swift */; };
+		1FC05425200D31CC0039B558 /* OwnerContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC05424200D31CC0039B558 /* OwnerContact.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +40,10 @@
 		1FC0541820064D510039B558 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		1FC0541A2007A8810039B558 /* ContactCellWithPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactCellWithPhoto.swift; sourceTree = "<group>"; };
 		1FC0541C2007CFE40039B558 /* FavouritesBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesBar.swift; sourceTree = "<group>"; };
+		1FC0541E200D09180039B558 /* ChooseNumberOrigin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseNumberOrigin.swift; sourceTree = "<group>"; };
+		1FC05420200D11660039B558 /* ChooseDifferentNumberCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseDifferentNumberCell.swift; sourceTree = "<group>"; };
+		1FC05422200D18290039B558 /* OriginNumberCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OriginNumberCell.swift; sourceTree = "<group>"; };
+		1FC05424200D31CC0039B558 /* OwnerContact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerContact.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +92,7 @@
 			isa = PBXGroup;
 			children = (
 				1FC0540C2006465C0039B558 /* VoicelynContact.swift */,
+				1FC05424200D31CC0039B558 /* OwnerContact.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -102,6 +111,7 @@
 			children = (
 				1FC053FB20063FE60039B558 /* ContactsViewController.swift */,
 				1FC0541C2007CFE40039B558 /* FavouritesBar.swift */,
+				1FC0541E200D09180039B558 /* ChooseNumberOrigin.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -113,6 +123,8 @@
 				1FC05413200648670039B558 /* ContactCell.swift */,
 				1FC05415200648B70039B558 /* BaseCell.swift */,
 				1FC0541A2007A8810039B558 /* ContactCellWithPhoto.swift */,
+				1FC05420200D11660039B558 /* ChooseDifferentNumberCell.swift */,
+				1FC05422200D18290039B558 /* OriginNumberCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -198,6 +210,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1FC05414200648670039B558 /* ContactCell.swift in Sources */,
+				1FC05421200D11660039B558 /* ChooseDifferentNumberCell.swift in Sources */,
 				1FC0540D2006465C0039B558 /* VoicelynContact.swift in Sources */,
 				1FC054122006485B0039B558 /* FavouriteCell.swift in Sources */,
 				1FC053FC20063FE60039B558 /* ContactsViewController.swift in Sources */,
@@ -205,7 +218,10 @@
 				1FC0541D2007CFE40039B558 /* FavouritesBar.swift in Sources */,
 				1FC053FA20063FE60039B558 /* AppDelegate.swift in Sources */,
 				1FC0541920064D510039B558 /* Extensions.swift in Sources */,
+				1FC05425200D31CC0039B558 /* OwnerContact.swift in Sources */,
 				1FC0541B2007A8810039B558 /* ContactCellWithPhoto.swift in Sources */,
+				1FC05423200D18290039B558 /* OriginNumberCell.swift in Sources */,
+				1FC0541F200D09180039B558 /* ChooseNumberOrigin.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
