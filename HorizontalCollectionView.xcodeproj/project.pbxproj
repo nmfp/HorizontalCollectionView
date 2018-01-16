@@ -19,7 +19,7 @@
 		1FC0541920064D510039B558 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC0541820064D510039B558 /* Extensions.swift */; };
 		1FC0541B2007A8810039B558 /* ContactCellWithPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC0541A2007A8810039B558 /* ContactCellWithPhoto.swift */; };
 		1FC0541D2007CFE40039B558 /* FavouritesBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC0541C2007CFE40039B558 /* FavouritesBar.swift */; };
-		1FC0541F200D09180039B558 /* ChooseNumberOrigin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC0541E200D09180039B558 /* ChooseNumberOrigin.swift */; };
+		1FC0541F200D09180039B558 /* ChooseNumberToCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC0541E200D09180039B558 /* ChooseNumberToCall.swift */; };
 		1FC05421200D11660039B558 /* ChooseDifferentNumberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC05420200D11660039B558 /* ChooseDifferentNumberCell.swift */; };
 		1FC05423200D18290039B558 /* OriginNumberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC05422200D18290039B558 /* OriginNumberCell.swift */; };
 		1FC05425200D31CC0039B558 /* OwnerContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC05424200D31CC0039B558 /* OwnerContact.swift */; };
@@ -40,7 +40,7 @@
 		1FC0541820064D510039B558 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		1FC0541A2007A8810039B558 /* ContactCellWithPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactCellWithPhoto.swift; sourceTree = "<group>"; };
 		1FC0541C2007CFE40039B558 /* FavouritesBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesBar.swift; sourceTree = "<group>"; };
-		1FC0541E200D09180039B558 /* ChooseNumberOrigin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseNumberOrigin.swift; sourceTree = "<group>"; };
+		1FC0541E200D09180039B558 /* ChooseNumberToCall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseNumberToCall.swift; sourceTree = "<group>"; };
 		1FC05420200D11660039B558 /* ChooseDifferentNumberCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseDifferentNumberCell.swift; sourceTree = "<group>"; };
 		1FC05422200D18290039B558 /* OriginNumberCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OriginNumberCell.swift; sourceTree = "<group>"; };
 		1FC05424200D31CC0039B558 /* OwnerContact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerContact.swift; sourceTree = "<group>"; };
@@ -111,7 +111,7 @@
 			children = (
 				1FC053FB20063FE60039B558 /* ContactsViewController.swift */,
 				1FC0541C2007CFE40039B558 /* FavouritesBar.swift */,
-				1FC0541E200D09180039B558 /* ChooseNumberOrigin.swift */,
+				1FC0541E200D09180039B558 /* ChooseNumberToCall.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -221,7 +221,7 @@
 				1FC05425200D31CC0039B558 /* OwnerContact.swift in Sources */,
 				1FC0541B2007A8810039B558 /* ContactCellWithPhoto.swift in Sources */,
 				1FC05423200D18290039B558 /* OriginNumberCell.swift in Sources */,
-				1FC0541F200D09180039B558 /* ChooseNumberOrigin.swift in Sources */,
+				1FC0541F200D09180039B558 /* ChooseNumberToCall.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

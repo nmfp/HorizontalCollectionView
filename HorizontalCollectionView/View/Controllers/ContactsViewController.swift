@@ -46,12 +46,16 @@ class ContactsViewController: UIViewController, UICollectionViewDataSource, UICo
     lazy var contactsCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        cv.backgroundColor = .red
         cv.dataSource = self
         cv.delegate = self
         return cv
     }()
     
+    lazy var chooseNumberToCallView: ChooseNumberToCall = {
+        let view = ChooseNumberToCall()
+        view.contactsViewController = self
+        return view
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -189,6 +193,10 @@ class ContactsViewController: UIViewController, UICollectionViewDataSource, UICo
     
     func handleTappingFavourite(cell: BaseCell) {
         print("handle tapping no controller para o favorite...")
+        guard let indexPath = favouritesBar.collectionView.indexPath(for: cell) else {return}
+        let favourite = favouritesArray[indexPath.item]
+        chooseNumberToCallView.contact = favourite
+        chooseNumberToCallView.showNumbersToCallView()
     }
     
     //MARK: - CollectionView Delegate / Datasource

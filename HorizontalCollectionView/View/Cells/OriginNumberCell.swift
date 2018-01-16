@@ -60,6 +60,4 @@ class OriginNumberCell: ChooseDifferentNumberCell {
         stackView.distribution = .fillProportionally
         addSubview(stackView)
     }
-    
-    
 }
