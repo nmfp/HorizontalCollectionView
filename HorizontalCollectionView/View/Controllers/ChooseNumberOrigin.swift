@@ -19,11 +19,42 @@ class ChooseNumberOrigin: UIView, UICollectionViewDataSource, UICollectionViewDe
         return cv
     }()
     
+    
+    let containerView: UIView = {
+        let cv = UIView()
+        let iv = UIImageView(image: #imageLiteral(resourceName: "Perfil"))
+        let label = UILabel()
+        label.textColor = .white
+        label.backgroundColor = UIColor(white: 1, alpha: 0.4)
+        
+        return cv
+    }()
+    
+    let profileImageView: UIImageView = {
+        let iv = UIImageView(image: #imageLiteral(resourceName: "Perfil"))
+        iv.contentMode = .scaleAspectFill
+        iv.clipsToBounds = true
+        return iv
+    }()
+    
+    let contactLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .white
+        label.backgroundColor = UIColor(white: 1, alpha: 0.4)
+        return label
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = UIColor(white: 1, alpha: 0.95)
-        
+       
+        addSubview(profileImageView)
+        addSubview(contactLabel)
         addSubview(collectionView)
+        
+        profileImageView.anchor(top: topAnchor, left: nil, bottom: nil, right: rightAnchor, paddingTop: -100, paddingLeft: 0, paddingBottom: 0, paddingRight: -100, width: 200, height: 200)
+        contactLabel.anchor(top: nil, left: leftAnchor, bottom: profileImageView.bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 50)
+        collectionView.anchor(top: profileImageView.bottomAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
         
     }
     
