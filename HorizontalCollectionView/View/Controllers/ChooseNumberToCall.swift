@@ -53,6 +53,16 @@ class ChooseNumberToCall: UIView, UICollectionViewDataSource, UICollectionViewDe
         return cv
     }()
     
+    lazy var customCollection: UICollectionView = {
+        let cv = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        cv.backgroundColor = .green
+        cv.delegate = self
+        cv.dataSource = self
+        return cv
+    }()
+    
+    
+    
     let headerId = "headerId"
     let cellId = "cellId"
     
@@ -69,8 +79,9 @@ class ChooseNumberToCall: UIView, UICollectionViewDataSource, UICollectionViewDe
             window.addSubview(containerView)
             window.addSubview(profileImageView)
             window.addSubview(contactLabel)
-            window.addSubview(collectionView)
-            
+//            window.addSubview(collectionView)
+  
+            window.addSubview(customCollection)
             blackView.frame = window.frame
             blackView.alpha = 0
             
@@ -82,13 +93,17 @@ class ChooseNumberToCall: UIView, UICollectionViewDataSource, UICollectionViewDe
             self.contactLabel.frame = CGRect(x: 0, y: window.frame.height, width: window.frame.width, height: 30)
             self.collectionView.frame = CGRect(x: 0, y: window.frame.height, width: window.frame.width, height: height - self.profileImageView.frame.height)
             
+            
+             self.customCollection.frame = CGRect(x: 0, y: window.frame.height, width: window.frame.width, height: height - self.profileImageView.frame.height)
             UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                 self.blackView.alpha = 1
                 self.containerView.frame = CGRect(x: 0, y: y, width: self.containerView.frame.width, height: self.containerView.frame.height)
                 self.profileImageView.frame = CGRect(x: 0, y: y, width: self.containerView.frame.width, height: self.profileImageView.frame.height)
                 self.contactLabel.frame = CGRect(x: 0, y: y + self.profileImageView.frame.height - self.contactLabel.frame.height, width: self.contactLabel.frame.width, height: self.contactLabel.frame.height)
                 self.collectionView.frame = CGRect(x: 0, y: y + self.profileImageView.frame.height, width: self.collectionView.frame.width, height: self.collectionView.frame.height)
-                self.collectionView.reloadData()
+//                self.collectionView.reloadData()
+                self.customCollection.frame = CGRect(x: 0, y: y + self.profileImageView.frame.height, width: self.collectionView.frame.width, height: self.collectionView.frame.height)
+                
             }, completion: {finished in
                 print("Antes do refresh....")
                 
@@ -107,11 +122,14 @@ class ChooseNumberToCall: UIView, UICollectionViewDataSource, UICollectionViewDe
                 self.profileImageView.frame = CGRect(x: 0, y: window.frame.height, width: self.containerView.frame.width, height: self.containerView.frame.height)
                 self.contactLabel.frame = CGRect(x: 0, y: window.frame.height, width: self.contactLabel.frame.width, height: self.contactLabel.frame.height)
                 self.collectionView.frame = CGRect(x: 0, y: window.frame.height, width: self.collectionView.frame.width, height: self.collectionView.frame.height)
+                self.customCollection.frame = CGRect(x: 0, y: window.frame.height, width: self.collectionView.frame.width, height: self.collectionView.frame.height)
             }
         }) { (finished) in
             
         }
     }
+    
+    let names = ["nuno", "pedro", "andre", "marco", "rafael", "miguelangelo"]
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -125,8 +143,11 @@ class ChooseNumberToCall: UIView, UICollectionViewDataSource, UICollectionViewDe
 //        contactLabel.anchor(top: nil, left: containerView.leftAnchor, bottom: profileImageView.bottomAnchor, right: containerView.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 50)
 //        collectionView.anchor(top: profileImageView.bottomAnchor, left: containerView.leftAnchor, bottom: nil, right: containerView.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
 
-        collectionView.register(OriginNumberCell.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: headerId)
-        collectionView.register(ChooseDifferentNumberCell.self, forCellWithReuseIdentifier: cellId)
+//        collectionView.register(OriginNumberCell.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: headerId)
+//        collectionView.register(ChooseDifferentNumberCell.self, forCellWithReuseIdentifier: cellId)
+        
+        customCollection.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        customCollection.register(ChooseDifferentNumberCell.self, forCellWithReuseIdentifier: cellId)
     }
     
     var contact: VoicelynContact? {
@@ -146,28 +167,37 @@ class ChooseNumberToCall: UIView, UICollectionViewDataSource, UICollectionViewDe
     //MARK: - DataSource
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         print("CEMAS contas")
-        return 2
+//        return 2
+        return ownerContact.allMyNumbers.count - 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! ChooseDifferentNumberCell
+
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! ChooseDifferentNumberCell
-        cell.phoneNumber = ownerContact.allMyNumbers.filter {$0.number != ownerContact.numberInUse.number}[indexPath.item]
-        print("CEMAS")
+                cell.phoneNumber = ownerContact.allMyNumbers.filter {$0.number != ownerContact.numberInUse.number}[indexPath.item]
+//        cell.phoneNumberLabel.text = names[indexPath.item]
+//        let label = UILabel()
+//        label.text = names[indexPath.item]
+//        label.frame = cell.frame
+//        cell.addSubview(label)
+        print("indexPath: ", indexPath.item)
         return cell
     }
     
     //MARK: - FlowLayout
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: self.frame.width, height: 200)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: self.frame.width, height: 150)
     }
     
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerId, for: indexPath) as! OriginNumberCell
-        header.phoneNumberInUse = ownerContact.numberInUse
-        return header
-    }
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+//        return CGSize(width: self.frame.width, height: 150)
+//    }
+//
+//    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+//        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerId, for: indexPath) as! OriginNumberCell
+//        header.phoneNumberInUse = ownerContact.numberInUse
+//        return header
+//    }
 }
