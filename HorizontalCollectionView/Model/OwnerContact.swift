@@ -14,7 +14,7 @@ struct OwnerContact {
     
     init() {
         self.numberInUse = CountryPhoneNumber(dictionary: ["country" : "Portugal","number": "+351967968483"])
-        self.allMyNumbers = [CountryPhoneNumber(dictionary: ["country" : "Portugal","number": "+351967968483"]), CountryPhoneNumber(dictionary: ["country" : "Portugal","number": "+351914627759"])]
+        self.allMyNumbers = [CountryPhoneNumber(dictionary: ["country" : "Portugal","number": "+351967968483"]), CountryPhoneNumber(dictionary: ["country" : "Portugal","number": "+351914627759"]), CountryPhoneNumber(dictionary: ["country" : "United Kingdom","number": "+4423471378291"]), CountryPhoneNumber(dictionary: ["country" : "United States","number": "+164353538483"])]
     }
 }
 

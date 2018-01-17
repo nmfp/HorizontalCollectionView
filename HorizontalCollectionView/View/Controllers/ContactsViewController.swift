@@ -59,7 +59,6 @@ class ContactsViewController: UIViewController, UICollectionViewDataSource, UICo
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
         setupNavBar()
         setupFavouritesBar()
         fetchContacts()
@@ -219,18 +218,9 @@ class ContactsViewController: UIViewController, UICollectionViewDataSource, UICo
         return CGSize(width: view.frame.width, height: 80)
     }
     
-    func scrollViewDidScrollToTop(_ scrollView: UIScrollView) {
-        print("SCROLL")
-    }
-    
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         print("scrollViewDidEndDecelerating")
         searchBarTextDidEndEditing(searchBar)
-    }
-    
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        print("scrollViewDidEndDragging")
-        
     }
     
     //MARK: - FlowLayoutDelegate
