@@ -59,6 +59,7 @@ class ContactsViewController: UIViewController, UICollectionViewDataSource, UICo
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = .white
         setupNavBar()
         setupFavouritesBar()
         fetchContacts()

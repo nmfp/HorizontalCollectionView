@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ChooseNumberToCall: UIView, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate {
+class ChooseNumberToCall: UIView, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, DifferentNumberToCallProtocol {
     
     var contact: VoicelynContact? {
         didSet {
@@ -183,5 +183,19 @@ class ChooseNumberToCall: UIView, UICollectionViewDataSource, UICollectionViewDe
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerId, for: indexPath) as! HeaderNumberCell
         header.phoneNumberInUse = ownerContact.numberInUse
         return header
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("Escolhido numero")
+        handleDismiss()
+    }
+    
+    //MARK: - DifferentNumberToCallProtocol
+    func handleChooseDifferentNumberToCall(cell: ChooseDifferentNumberCell) {
+        print("Foi escolhido o numero chamador: ", cell.phoneNumber?.number ?? "")
+    }
+    
+    func handleOptionOfCallerNumber(view: UIView) {
+        
     }
 }

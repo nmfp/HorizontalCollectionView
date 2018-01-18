@@ -16,11 +16,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        let contactViewController = ContactsViewController()
-        let navController = UINavigationController(rootViewController: contactViewController)
+//        let contactViewController = ContactsViewController()
+//        let navController = UINavigationController(rootViewController: contactViewController)
         
         window = UIWindow()
-        window?.rootViewController = navController
+//        window?.rootViewController = navController
+        window?.rootViewController = TabBarController()
         window?.makeKeyAndVisible()
         
         return true
