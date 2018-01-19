@@ -28,7 +28,7 @@ class KeypadViewController: UIViewController, UICollectionViewDelegateFlowLayout
         let cv = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         cv.delegate = self
         cv.dataSource = self
-        cv.backgroundColor = .clear
+        cv.backgroundColor = .green
         return cv
     }()
     
@@ -50,12 +50,23 @@ class KeypadViewController: UIViewController, UICollectionViewDelegateFlowLayout
             return
         }
         isOpen = true
-        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
-            self.collectionViewTopAnchor?.isActive = true
-            self.collectionViewHeightAnchor?.isActive = true
-//            self.view.layoutIfNeeded()
-            self.view.layoutSubviews()
-            self.collectionView.center.y += self.collectionView.frame.height / 2
+        
+        collectionViewHeightAnchor?.isActive = false
+        collectionViewHeightAnchor?.constant = CGFloat((items.count * 50)) + (CGFloat(items.count) * marginCell)
+        print("CONSTANTE:      ", collectionViewHeightAnchor?.constant)
+        collectionViewHeightAnchor?.isActive =  true
+        
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseInOut, animations: {
+//            self.collectionViewTopAnchor?.isActive = true
+//            self.collectionViewHeightAnchor?.isActive = true
+            self.view.layoutIfNeeded()
+            
+//            self.view.layoutSubviews()
+            print("CENTER aNTES DAS CONTAS: ", self.collectionView.center.y)
+//            self.collectionView.center.y += self.collectionView.frame.height / 2
+            print("CENTER: ", self.collectionView.center.y)
+            print("CENTER VIEW: ", self.view.center.y)
+            print("Height: ", self.collectionView.frame.height)
         }, completion: nil)
     }
     
@@ -66,20 +77,31 @@ class KeypadViewController: UIViewController, UICollectionViewDelegateFlowLayout
         
         isOpen = false
         
-        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
+        collectionViewHeightAnchor?.isActive = false
+        collectionViewHeightAnchor?.constant = 0
+        collectionViewHeightAnchor?.isActive =  true
+        
+        UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseInOut, animations: {
 //            self.collectionViewTopAnchor?.isActive = true
 //            self.collectionViewHeightAnchor?.isActive = true
             
-            self.collectionViewTopAnchor?.isActive = false
-            self.collectionViewHeightAnchor?.isActive = false
+//            self.collectionViewTopAnchor?.isActive = false
+//            self.collectionViewHeightAnchor?.isActive = false
 //                        self.view.layoutIfNeeded()
-            
-            self.collectionView.center.y -= self.collectionView.frame.height / 2
-            self.view.layoutSubviews()
+            print("CENTER aNTES DAS CONTAS: ", self.collectionView.center.y)
+//            self.collectionView.center.y -= ((self.collectionView.frame.height / 2) + 10)
+            print("CENTER: ", self.collectionView.center.y)
+            print("CENTER VIEW: ", self.view.center.y)
+            print("Height: ", self.collectionView.frame.height)
+//            self.view.layoutSubviews()
+            self.view.layoutIfNeeded()
+            print("CENTER: ", self.collectionView.center.y)
+            print("CENTER VIEW: ", self.view.center.y)
+            print("Height: ", self.collectionView.frame.height)
         }, completion: nil)
     }
     
-    
+    //collectionViewHeightAnchor = collectionView.heightAnchor.constraint(equalToConstant: CGFloat((items.count * 50)) + (CGFloat(items.count) * marginCell))
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -90,9 +112,9 @@ class KeypadViewController: UIViewController, UICollectionViewDelegateFlowLayout
         chooseNumberButton.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         
         view.addSubview(collectionView)
-        collectionView.anchor(top: nil, left: chooseNumberButton.leftAnchor, bottom: nil, right: chooseNumberButton.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
-        collectionViewTopAnchor = collectionView.topAnchor.constraint(equalTo: chooseNumberButton.bottomAnchor, constant: 10)
-        collectionViewHeightAnchor = collectionView.heightAnchor.constraint(equalToConstant: CGFloat((items.count * 50)) + (CGFloat(items.count) * marginCell))
+        collectionView.anchor(top: chooseNumberButton.bottomAnchor, left: chooseNumberButton.leftAnchor, bottom: nil, right: chooseNumberButton.rightAnchor, paddingTop: 10, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+//        collectionViewTopAnchor = collectionView.topAnchor.constraint(equalTo: chooseNumberButton.bottomAnchor, constant: 10)
+        collectionViewHeightAnchor = collectionView.heightAnchor.constraint(equalToConstant: 0)
         
         collectionView.register(ChangeNumberCell.self, forCellWithReuseIdentifier: cellId)
 //        collectionView.center = CGPoint(x: self.view.center.x, y: view.center.y + 25)
@@ -100,7 +122,7 @@ class KeypadViewController: UIViewController, UICollectionViewDelegateFlowLayout
     
     //MARK: - Delegate
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2
+        return 3
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -120,9 +142,9 @@ class KeypadViewController: UIViewController, UICollectionViewDelegateFlowLayout
         return marginCell
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return marginCell
-    }
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+//        return marginCell
+//    }
     
     //MARK: - KeypadDelegate
     func handleChangeNumberTapped(for cell: ChangeNumberCell) {
