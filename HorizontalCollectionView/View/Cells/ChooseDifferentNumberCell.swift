@@ -23,15 +23,9 @@ class ChooseDifferentNumberCell: BaseCell {
         }
     }
     
-
+    var delegate: ChooseNumberToCall?
     
     let height: CGFloat = 20
-    
-    let typeLabel: UILabel = {
-        let label = UILabel()
-        label.text = "CALL FROM"
-        return label
-    }()
     
     let countryLabel: UILabel = {
         let label = UILabel()
@@ -59,8 +53,13 @@ class ChooseDifferentNumberCell: BaseCell {
         let stack = UIStackView(arrangedSubviews: [self.countryLabel, self.phoneNumberLabel])
         stack.axis = .horizontal
         stack.distribution = .equalSpacing
+        stack.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleCallNumber)))
         return stack
     }()
+    
+    @objc func handleCallNumber() {
+        delegate?.handleChooseDifferentNumberToCall(cell: self)
+    }
     
     override func setupViews() {
         addSubview(countryImageView)

@@ -120,11 +120,11 @@ class ChooseNumberToCall: UIView, UICollectionViewDataSource, UICollectionViewDe
     }
     
     func scrollToSection(_ section:Int)  {
-            let indexPath = IndexPath(item: 1, section: section)
-            if let attributes =  customCollection.layoutAttributesForSupplementaryElement(ofKind: UICollectionElementKindSectionHeader, at: indexPath) {
-                let topOfHeader = CGPoint(x: 0, y: attributes.frame.origin.y - customCollection.contentInset.top)
-                customCollection.setContentOffset(topOfHeader, animated:true)
-            }
+        let indexPath = IndexPath(item: 1, section: section)
+        if let attributes =  customCollection.layoutAttributesForSupplementaryElement(ofKind: UICollectionElementKindSectionHeader, at: indexPath) {
+            let topOfHeader = CGPoint(x: 0, y: attributes.frame.origin.y - customCollection.contentInset.top)
+            customCollection.setContentOffset(topOfHeader, animated:true)
+        }
     }
     
     @objc func handleDismiss() {
@@ -164,6 +164,7 @@ class ChooseNumberToCall: UIView, UICollectionViewDataSource, UICollectionViewDe
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! ChooseDifferentNumberCell
+        cell.delegate = self
         cell.phoneNumber = ownerContact.allMyNumbers.filter {$0.number != ownerContact.numberInUse.number}[indexPath.item]
         return cell
     }
@@ -193,6 +194,20 @@ class ChooseNumberToCall: UIView, UICollectionViewDataSource, UICollectionViewDe
     //MARK: - DifferentNumberToCallProtocol
     func handleChooseDifferentNumberToCall(cell: ChooseDifferentNumberCell) {
         print("Foi escolhido o numero chamador: ", cell.phoneNumber?.number ?? "")
+        handleDismiss()
+        
+        if let window = UIApplication.shared.keyWindow {
+            if let tabBarViewController = window.rootViewController as? TabBarController {
+                if let viewControllers = tabBarViewController.viewControllers{
+                    if let navController = viewControllers[0] as? UINavigationController {
+                        let keypadViewController = KeypadViewController()
+                        keypadViewController.myButton.setTitle(cell.phoneNumber?.number, for: .normal)
+                        navController.pushViewController(keypadViewController, animated: true)
+                        tabBarViewController.selectedIndex = 0
+                    }
+                }
+            }
+        }
     }
     
     func handleOptionOfCallerNumber(view: UIView) {

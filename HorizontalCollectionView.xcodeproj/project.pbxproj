@@ -11,6 +11,13 @@
 		1F5B81D02010C72500447218 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5B81CF2010C72500447218 /* TabBarController.swift */; };
 		1F5B81D22010C9E100447218 /* KeypadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5B81D12010C9E100447218 /* KeypadViewController.swift */; };
 		1F5B81D42010CCA700447218 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F5B81D32010CCA600447218 /* Assets.xcassets */; };
+		1F681DFA201614F000506F87 /* DropDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F681DF9201614F000506F87 /* DropDownView.swift */; };
+		1F681DFC2016152A00506F87 /* ChangeNumberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F681DFB2016152A00506F87 /* ChangeNumberCell.swift */; };
+		1F681DFE2016157600506F87 /* MyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F681DFD2016157600506F87 /* MyButton.swift */; };
+		1F681E0C2018FE0800506F87 /* ContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F681E0B2018FE0800506F87 /* ContainerView.swift */; };
+		1F681E0E201A4CDF00506F87 /* VoicelynCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F681E0D201A4CDF00506F87 /* VoicelynCell.swift */; };
+		1F681E10201A4E0D00506F87 /* DropView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F681E0F201A4E0D00506F87 /* DropView.swift */; };
+		1F681E12201A5A9500506F87 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F681E11201A5A9500506F87 /* CustomButton.swift */; };
 		1FC053FA20063FE60039B558 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC053F920063FE60039B558 /* AppDelegate.swift */; };
 		1FC053FC20063FE60039B558 /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC053FB20063FE60039B558 /* ContactsViewController.swift */; };
 		1FC053FF20063FE60039B558 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FC053FD20063FE60039B558 /* Main.storyboard */; };
@@ -33,6 +40,13 @@
 		1F5B81CF2010C72500447218 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		1F5B81D12010C9E100447218 /* KeypadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeypadViewController.swift; sourceTree = "<group>"; };
 		1F5B81D32010CCA600447218 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1F681DF9201614F000506F87 /* DropDownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownView.swift; sourceTree = "<group>"; };
+		1F681DFB2016152A00506F87 /* ChangeNumberCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeNumberCell.swift; sourceTree = "<group>"; };
+		1F681DFD2016157600506F87 /* MyButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyButton.swift; sourceTree = "<group>"; };
+		1F681E0B2018FE0800506F87 /* ContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerView.swift; sourceTree = "<group>"; };
+		1F681E0D201A4CDF00506F87 /* VoicelynCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoicelynCell.swift; sourceTree = "<group>"; };
+		1F681E0F201A4E0D00506F87 /* DropView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropView.swift; sourceTree = "<group>"; };
+		1F681E11201A5A9500506F87 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		1FC053F620063FE60039B558 /* HorizontalCollectionView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HorizontalCollectionView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FC053F920063FE60039B558 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1FC053FB20063FE60039B558 /* ContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
@@ -63,6 +77,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1F681DF8201614DC00506F87 /* Other Views */ = {
+			isa = PBXGroup;
+			children = (
+				1F681DF9201614F000506F87 /* DropDownView.swift */,
+				1F681DFD2016157600506F87 /* MyButton.swift */,
+				1F681E0B2018FE0800506F87 /* ContainerView.swift */,
+				1F681E0F201A4E0D00506F87 /* DropView.swift */,
+				1F681E11201A5A9500506F87 /* CustomButton.swift */,
+			);
+			path = "Other Views";
+			sourceTree = "<group>";
+		};
 		1FC053ED20063FE60039B558 = {
 			isa = PBXGroup;
 			children = (
@@ -106,6 +132,7 @@
 		1FC0540E2006482D0039B558 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				1F681DF8201614DC00506F87 /* Other Views */,
 				1FC05410200648410039B558 /* Cells */,
 				1FC0540F200648380039B558 /* Controllers */,
 			);
@@ -127,6 +154,7 @@
 		1FC05410200648410039B558 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				1F681DFB2016152A00506F87 /* ChangeNumberCell.swift */,
 				1FC054112006485B0039B558 /* FavouriteCell.swift */,
 				1FC05413200648670039B558 /* ContactCell.swift */,
 				1FC05415200648B70039B558 /* BaseCell.swift */,
@@ -134,6 +162,7 @@
 				1FC05420200D11660039B558 /* ChooseDifferentNumberCell.swift */,
 				1FC05422200D18290039B558 /* HeaderNumberCell.swift */,
 				1F5B81CD200F479800447218 /* TestCell.swift */,
+				1F681E0D201A4CDF00506F87 /* VoicelynCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -218,20 +247,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F681E0E201A4CDF00506F87 /* VoicelynCell.swift in Sources */,
+				1F681E0C2018FE0800506F87 /* ContainerView.swift in Sources */,
 				1FC05414200648670039B558 /* ContactCell.swift in Sources */,
 				1FC05421200D11660039B558 /* ChooseDifferentNumberCell.swift in Sources */,
 				1F5B81D22010C9E100447218 /* KeypadViewController.swift in Sources */,
 				1FC0540D2006465C0039B558 /* VoicelynContact.swift in Sources */,
 				1F5B81D02010C72500447218 /* TabBarController.swift in Sources */,
 				1FC054122006485B0039B558 /* FavouriteCell.swift in Sources */,
+				1F681DFA201614F000506F87 /* DropDownView.swift in Sources */,
 				1FC053FC20063FE60039B558 /* ContactsViewController.swift in Sources */,
+				1F681DFC2016152A00506F87 /* ChangeNumberCell.swift in Sources */,
 				1FC05416200648B70039B558 /* BaseCell.swift in Sources */,
 				1FC0541D2007CFE40039B558 /* FavouritesBar.swift in Sources */,
 				1F5B81CE200F479800447218 /* TestCell.swift in Sources */,
 				1FC053FA20063FE60039B558 /* AppDelegate.swift in Sources */,
+				1F681E10201A4E0D00506F87 /* DropView.swift in Sources */,
 				1FC0541920064D510039B558 /* Extensions.swift in Sources */,
+				1F681E12201A5A9500506F87 /* CustomButton.swift in Sources */,
 				1FC05425200D31CC0039B558 /* OwnerContact.swift in Sources */,
 				1FC0541B2007A8810039B558 /* ContactCellWithPhoto.swift in Sources */,
+				1F681DFE2016157600506F87 /* MyButton.swift in Sources */,
 				1FC05423200D18290039B558 /* HeaderNumberCell.swift in Sources */,
 				1FC0541F200D09180039B558 /* ChooseNumberToCall.swift in Sources */,
 			);
